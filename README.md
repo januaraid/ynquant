@@ -70,7 +70,6 @@
 | NextYearForecastProfit2ndQuarter                                             | 当期純利益\_予想\_翌事業年度第2四半期末           | String |                                                                  |
 | NextYearForecastEarningsPerShare2ndQuarter                                   | 一株あたり当期純利益\_予想\_翌事業年度第2四半期末      | String |                                                                  |
 | ForecastNetSales                                                             | 売上高\_予想\_期末                      | String |                                                                  |
- |
 | ForecastOperatingProfit                                                      | 営業利益\_予想\_期末                     | String |                                                                  |
 | ForecastOrdinaryProfit                                                       | 経常利益\_予想\_期末                     | String |                                                                  |
 | ForecastProfit                                                               | 当期純利益\_予想\_期末                    | String |                                                                  |
