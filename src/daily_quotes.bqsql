@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS `ynquant.jquants.daily_quotes` ( 
+    Date STRING, 
+    Code STRING, 
+    Open FLOAT64, 
+    High FLOAT64, 
+    Low FLOAT64, 
+    Close FLOAT64, 
+    UpperLimit STRING, 
+    LowerLimit STRING, 
+    Volume FLOAT64, 
+    TurnoverValue FLOAT64, 
+    AdjustmentFactor FLOAT64, 
+    AdjustmentOpen FLOAT64, 
+    AdjustmentHigh FLOAT64, 
+    AdjustmentLow FLOAT64, 
+    AdjustmentClose FLOAT64, 
+    AdjustmentVolume FLOAT64 
+);

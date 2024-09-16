@@ -1,0 +1,33 @@
+SELECT
+  LocalCode,
+  CurrentFiscalYearEndDate,
+  DisclosedDate,
+  TypeOfDocument,
+  TypeOfCurrentPeriod,
+  ForecastDividendPerShareAnnual AS `一株あたり配当予想_合計`,
+  ForecastDistributionsPerUnit_REIT_ AS `一口当たり予想分配金`,
+  ForecastTotalDividendPaidAnnual AS `予想配当金総額`,
+  ForecastPayoutRatioAnnual AS `予想配当性向`,
+  NextYearForecastDividendPerShare1stQuarter AS `一株あたり配当予想_翌事業年度第1四半期末`,
+  NextYearForecastDividendPerShare2ndQuarter AS `一株あたり配当予想_翌事業年度第2四半期末`,
+  NextYearForecastDividendPerShare3rdQuarter AS `一株あたり配当予想_翌事業年度第3四半期末`,
+  NextYearForecastDividendPerShareFiscalYearEnd AS `一株あたり配当予想_翌事業年度期末`,
+  NextYearForecastDividendPerShareAnnual AS `一株あたり配当予想_翌事業年度合計`,
+  NextYearForecastDistributionsPerUnit_REIT_ AS `一口当たり翌事業年度予想分配金`,
+  NextYearForecastPayoutRatioAnnual AS `翌事業年度予想配当性向`,
+  ResultDividendPerShare1stQuarter AS `一株あたり配当実績_第1四半期末`,
+  ResultDividendPerShare2ndQuarter AS `一株あたり配当実績_第2四半期末`,
+  ResultDividendPerShare3rdQuarter AS `一株あたり配当実績_第3四半期末`,
+  ResultDividendPerShareFiscalYearEnd AS `一株あたり配当実績_期末`,
+  ResultDividendPerShareAnnual AS `一株あたり配当実績_合計`,
+  DistributionsPerUnit_REIT_ AS `一口当たり分配金`,
+  ResultTotalDividendPaidAnnual AS `配当金総額`,
+  ResultPayoutRatioAnnual AS `配当性向`
+FROM
+  `ynquant.jquants.financials`
+
+
+
+
+
+

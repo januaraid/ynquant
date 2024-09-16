@@ -1,0 +1,632 @@
+CREATE OR REPLACE VIEW `ynquant.jquants.financials_view` (
+  LocalCode OPTIONS(description = "企業コード"),
+  DisclosedDate OPTIONS(description = "開示日"),
+  TypeOfCurrentPeriod OPTIONS(description = "現在の期間種別（1Q, 2Q, 3Q, 4Q, FYなど）"),
+  NetSales_YTD OPTIONS(description = "通期積み上げの売上高"),
+  OperatingProfit_YTD OPTIONS(description = "通期積み上げの営業利益"),
+  OrdinaryProfit_YTD OPTIONS(description = "通期積み上げの経常利益"),
+  Profit_YTD OPTIONS(description = "通期積み上げの純利益"),
+  NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock OPTIONS(description = "期末発行済株式数（自己株式を含む）"),
+  EarningsPerShare_YTD OPTIONS(description = "通期積み上げの1株当たり利益"),
+  ForecastNetSales_YTD OPTIONS(description = "通期予想の売上高"),
+  ForecastOperatingProfit_YTD OPTIONS(description = "通期予想の営業利益"),
+  ForecastOrdinaryProfit_YTD OPTIONS(description = "通期予想の経常利益"),
+  ForecastProfit_YTD OPTIONS(description = "通期予想の純利益"),
+  ForecastEarningsPerShare_YTD OPTIONS(description = "通期予想の1株当たり利益"),
+  Forecast_PER_YTD OPTIONS(description = "通期予想のPER"),
+  Forecast_PSR_YTD OPTIONS(description = "通期予想のPSR"),
+  NextYearForecastNetSales_YTD OPTIONS(description = "翌事業年度予想の売上"),
+  NextYearForecastOperatingProfit_YTD OPTIONS(description = "翌事業年度予想の営業利益"),
+  NextYearForecastOrdinaryProfit_YTD OPTIONS(description = "翌事業年度予想の経常利益"),
+  NextYearForecastProfit_YTD OPTIONS(description = "翌事業年度予想の純利益"),
+  NextYearForecastEarningsPerShare_YTD OPTIONS(description = "翌事業年度予想の1株当たり利益"),
+  NextYearForecast_PER_YTD OPTIONS(description = "翌事業年度予想のPER"),
+  NextYearForecast_PSR_YTD OPTIONS(description = "翌事業年度予想のPSR"),
+  EquityToAssetRatio OPTIONS(description = "自己資本比率"),
+  Equity OPTIONS(description = "自己資本"),
+  TotalAssets OPTIONS(description = "総資産"),
+  CashFlowsFromOperatingAndInvestingActivities OPTIONS(description = "営業活動および投資活動によるキャッシュフロー"),
+  CashFlowsFromOperatingActivities OPTIONS(description = "営業活動によるキャッシュフロー"),
+  CashFlowsFromInvestingActivities OPTIONS(description = "投資活動によるキャッシュフロー"),
+  CashAndEquivalents OPTIONS(description = "現金および現金同等物"),
+  OperatingProfitMargin_YTD OPTIONS(description = "通期積み上げの営業利益率"),
+  OrdinaryProfitMargin_YTD OPTIONS(description = "通期積み上げの経常利益率"),
+  NetProfitMargin_YTD OPTIONS(description = "通期積み上げの当期純利益率"),
+  FCFMargin_YTD OPTIONS(description = "通期積み上げのFCFマージン（FCF/売上高）"),
+  OperatingCFMargin_YTD OPTIONS(description = "通期積み上げの営業CF比率（営業CF/売上高）"),
+  ROE OPTIONS(description = "当期純利益/自己資本"),
+  ROA OPTIONS(description = "当期純利益/総資産"),
+  TotalAssetTurnover OPTIONS(description = "売上高/総資産"),
+  PER OPTIONS(description = "株価/EPS"),
+  PBR OPTIONS(description = "BPS/株価"),
+  PSR OPTIONS(description = "売上高/時価総額"),
+  NetSales_singleQ OPTIONS(description = "単Qの売上高"),
+  OperatingProfit_singleQ OPTIONS(description = "単Qの営業利益"),
+  OrdinaryProfit_singleQ OPTIONS(description = "単Qの経常利益"),
+  Profit_singleQ OPTIONS(description = "単Qの純利益"),
+  EarningsPerShare_singleQ OPTIONS(description = "単Qの1株当たり利益"),
+  OperatingProfitMargin_singleQ OPTIONS(description = "単Qの営業利益率"),
+  OrdinaryProfitMargin_singleQ OPTIONS(description = "単Qの経常利益率"),
+  NetProfitMargin_singleQ OPTIONS(description = "単Qの当期純利益率"),
+  FCFMargin_singleQ OPTIONS(description = "単QのFCFマージン"),
+  OperatingCFMargin_singleQ OPTIONS(description = "単Qの営業CF比率"),
+  ROE_singleQ OPTIONS(description = "単Qの当期純利益/自己資本（通期の総資産を割る4して近似）"),
+  ROA_singleQ OPTIONS(description = "単Qの当期純利益/総資産（通期の総資産を割る4して近似）"),
+  TotalAssetTurnover_singleQ OPTIONS(description = "単Qの売上高/総資産（通期の総資産を割る4して近似）"),
+  PER_singleQ OPTIONS(description = "単QのPER"),
+  PSR_singleQ OPTIONS(description = "単QのPSR"),
+  Previous_EquityToAssetRatio_singleQ OPTIONS(description = "前年同Qの自己資本比率"),
+  Previous_Equity_singleQ OPTIONS(description = "前年同Qの自己資本"),
+  Previous_TotalAssets_singleQ OPTIONS(description = "前年同Qの総資産"),
+  Previous_NetSales_singleQ OPTIONS(description = "前年同Qの売上高"),
+  Previous_OperatingProfit_singleQ OPTIONS(description = "前年同Qの営業利益"),
+  Previous_OrdinaryProfit_singleQ OPTIONS(description = "前年同Qの経常利益"),
+  Previous_Profit_singleQ OPTIONS(description = "前年同Qの純利益"),
+  Previous_EarningsPerShare_singleQ OPTIONS(description = "前年同Qの1株当たり利益"),
+  Previous_OperatingProfitMargin_singleQ OPTIONS(description = "前年同Qの営業利益率"),
+  Previous_OrdinaryProfitMargin_singleQ OPTIONS(description = "前年同Qの経常利益率"),
+  Previous_NetProfitMargin_singleQ OPTIONS(description = "前年同Qの当期純利益率"),
+  Previous_FCFMargin_singleQ OPTIONS(description = "前年同QのFCFマージン"),
+  Previous_OperatingCFMargin_singleQ OPTIONS(description = "前年同Qの営業CF比率"),
+  Previous_ROE_singleQ OPTIONS(description = "前年同QのROE"),
+  Previous_ROA_singleQ OPTIONS(description = "前年同QのROA"),
+  Previous_TotalAssetTurnover_singleQ OPTIONS(description = "前年同Qの総資産回転率"),
+  Previous_PER_singleQ OPTIONS(description = "前年同QのPER"),
+  Previous_PSR_singleQ OPTIONS(description = "前年同QのPSR"),
+  PreviousQuarter_EquityToAssetRatio OPTIONS(description = "前Qの自己資本比率"),
+  PreviousQuarter_Equity OPTIONS(description = "前Qの自己資本"),
+  PreviousQuarter_TotalAssets OPTIONS(description = "前Qの総資産"),
+  PreviousQuarter_NetSales_singleQ OPTIONS(description = "前Qの売上高"),
+  PreviousQuarter_OperatingProfit_singleQ OPTIONS(description = "前Qの営業利益"),
+  PreviousQuarter_OrdinaryProfit_singleQ OPTIONS(description = "前Qの経常利益"),
+  PreviousQuarter_Profit_singleQ OPTIONS(description = "前Qの純利益"),
+  PreviousQuarter_EarningsPerShare_singleQ OPTIONS(description = "前Qの1株当たり利益"),
+  PreviousQuarter_OperatingProfitMargin_singleQ OPTIONS(description = "前Qの営業利益率"),
+  PreviousQuarter_OrdinaryProfitMargin_singleQ OPTIONS(description = "前Qの経常利益率"),
+  PreviousQuarter_NetProfitMargin_singleQ OPTIONS(description = "前Qの当期純利益率"),
+  PreviousQuarter_FCFMargin_singleQ OPTIONS(description = "前QのFCFマージン"),
+  PreviousQuarter_OperatingCFMargin_singleQ OPTIONS(description = "前Qの営業CF比率"),
+  PreviousQuarter_ROE_singleQ OPTIONS(description = "前Qの当期純利益/自己資本（通期の総資産を割る4して近似）"),
+  PreviousQuarter_ROA_singleQ OPTIONS(description = "前Qの当期純利益/総資産（通期の総資産を割る4して近似）"),
+  PreviousQuarter_TotalAssetTurnover_singleQ OPTIONS(description = "前Qの売上高/総資産（通期の総資産を割る4して近似）"),
+  PreviousQuarter_PER_singleQ OPTIONS(description = "前QのPER"),
+  PreviousQuarter_PSR_singleQ OPTIONS(description = "前QのPSR"),
+  Previous_NumberOfIssuedAndOutstandingShares OPTIONS(description = "前年期末の発行済株式数（自己株式を含む）"),
+  Previous_NetSales OPTIONS(description = "前年期末の売上高"),
+  Previous_OperatingProfit OPTIONS(description = "前年期末の営業利益"),
+  Previous_OrdinaryProfit OPTIONS(description = "前年期末の経常利益"),
+  Previous_Profit OPTIONS(description = "前年期末の純利益"),
+  Previous_EarningsPerShare OPTIONS(description = "前年期末の1株当たり利益"),
+  Previous_EquityToAssetRatio OPTIONS(description = "前年期末の自己資本比率"),
+  Previous_TotalAssets OPTIONS(description = "前年期末の総資産"),
+  Previous_CashFlowsFromOperatingAndInvestingActivities OPTIONS(description = "前年期末の営業活動および投資活動によるキャッシュフロー"),
+  Previous_CashFlowsFromOperatingActivities OPTIONS(description = "前年期末の営業活動によるキャッシュフロー"),
+  Previous_CashAndEquivalents OPTIONS(description = "前年期末の現金および現金同等物"),
+  StockPriceAtDisclosureDate OPTIONS(description = "開示日の直近時点での株価"),
+  MarketCapitalization OPTIONS(description = "時価総額") 
+) OPTIONS(description = "企業の財務データを集約し、単Qおよび前年期末のデータを含むビュー") AS
+WITH
+  financials_filtered AS (
+    SELECT
+      LocalCode,
+      DisclosedDate,
+      TypeOfCurrentPeriod,
+      CurrentFiscalYearEndDate,
+      CAST(
+        NULLIF(REGEXP_REPLACE(NetSales, r'[^0-9.-]', ''), '') AS FLOAT64
+      ) AS NetSales,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(OperatingProfit, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS OperatingProfit,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(OrdinaryProfit, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS OrdinaryProfit,
+      CAST(
+        NULLIF(REGEXP_REPLACE(Profit, r'[^0-9.-]', ''), '') AS FLOAT64
+      ) AS Profit,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(
+            NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock,
+            r'[^0-9.-]',
+            ''
+          ),
+          ''
+        ) AS FLOAT64
+      ) AS NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(EarningsPerShare, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS EarningsPerShare,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(ForecastNetSales, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS ForecastNetSales,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(ForecastOperatingProfit, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS ForecastOperatingProfit,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(ForecastOrdinaryProfit, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS ForecastOrdinaryProfit,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(ForecastProfit, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS ForecastProfit,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(ForecastEarningsPerShare, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS ForecastEarningsPerShare,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(NextYearForecastNetSales, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS NextYearForecastNetSales,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(NextYearForecastOperatingProfit, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS NextYearForecastOperatingProfit,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(NextYearForecastOrdinaryProfit, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS NextYearForecastOrdinaryProfit,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(NextYearForecastProfit, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS NextYearForecastProfit,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(NextYearForecastEarningsPerShare, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS NextYearForecastEarningsPerShare,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(EquityToAssetRatio, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS EquityToAssetRatio,
+      CAST(
+        NULLIF(REGEXP_REPLACE(TotalAssets, r'[^0-9.-]', ''), '') AS FLOAT64
+      ) AS TotalAssets,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(CashFlowsFromOperatingActivities, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS CashFlowsFromOperatingActivities,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(CashFlowsFromInvestingActivities, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS CashFlowsFromInvestingActivities,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(CashAndEquivalents, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS CashAndEquivalents,
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(BookValuePerShare, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS BookValuePerShare, -- 追加: 一株あたり純資産
+      CAST(
+        NULLIF(
+          REGEXP_REPLACE(Equity, r'[^0-9.-]', ''),
+          ''
+        ) AS FLOAT64
+      ) AS Equity, -- 追加: 純資産
+      ROW_NUMBER() OVER (
+        PARTITION BY
+          LocalCode,
+          CurrentFiscalYearEndDate,
+          TypeOfCurrentPeriod
+        ORDER BY
+          DisclosedDate ASC
+      ) AS rn
+    FROM
+      `ynquant.jquants.financials`
+    WHERE
+      is_consolidated = TRUE -- 決算短信に限定
+    QUALIFY
+      rn = 1 -- 各年度、四半期の最初の発表のみを保持
+  ),
+  financials_with_lag AS (
+    SELECT
+      LocalCode,
+      DisclosedDate,
+      TypeOfCurrentPeriod,
+      CurrentFiscalYearEndDate,
+      NetSales,
+      OperatingProfit,
+      OrdinaryProfit,
+      Profit,
+      NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock,
+      EarningsPerShare,
+      ForecastNetSales,
+      ForecastOperatingProfit,
+      ForecastOrdinaryProfit,
+      ForecastProfit,
+      ForecastEarningsPerShare,
+      NextYearForecastNetSales,
+      NextYearForecastOperatingProfit,
+      NextYearForecastOrdinaryProfit,
+      NextYearForecastProfit,
+      NextYearForecastEarningsPerShare,
+      EquityToAssetRatio,
+      TotalAssets,
+      LAST_VALUE(CashFlowsFromOperatingActivities IGNORE NULLS) OVER (
+        PARTITION BY
+          LocalCode
+        ORDER BY
+          DisclosedDate ROWS BETWEEN UNBOUNDED PRECEDING
+          AND CURRENT ROW
+      ) AS CashFlowsFromOperatingActivities, -- 最新の発表データで埋める
+      LAST_VALUE(CashFlowsFromInvestingActivities IGNORE NULLS) OVER (
+        PARTITION BY
+          LocalCode
+        ORDER BY
+          DisclosedDate ROWS BETWEEN UNBOUNDED PRECEDING
+          AND CURRENT ROW
+      ) AS CashFlowsFromInvestingActivities, -- 最新の発表データで埋める
+      LAST_VALUE(CashAndEquivalents IGNORE NULLS) OVER (
+        PARTITION BY
+          LocalCode
+        ORDER BY
+          DisclosedDate ROWS BETWEEN UNBOUNDED PRECEDING
+          AND CURRENT ROW
+      ) AS CashAndEquivalents, -- 最新の発表データで埋める
+      BookValuePerShare, -- 追加: 一株あたり純資産
+      Equity, -- 追加: 純資産
+      LAG(NetSales) OVER (
+        PARTITION BY
+          LocalCode,
+          CurrentFiscalYearEndDate
+        ORDER BY
+          DisclosedDate
+      ) AS Previous_NetSales,
+      LAG(OperatingProfit) OVER (
+        PARTITION BY
+          LocalCode,
+          CurrentFiscalYearEndDate
+        ORDER BY
+          DisclosedDate
+      ) AS Previous_OperatingProfit,
+      LAG(OrdinaryProfit) OVER (
+        PARTITION BY
+          LocalCode,
+          CurrentFiscalYearEndDate
+        ORDER BY
+          DisclosedDate
+      ) AS Previous_OrdinaryProfit,
+      LAG(Profit) OVER (
+        PARTITION BY
+          LocalCode,
+          CurrentFiscalYearEndDate
+        ORDER BY
+          DisclosedDate
+      ) AS Previous_Profit,
+      LAG(EarningsPerShare) OVER (
+        PARTITION BY
+          LocalCode,
+          CurrentFiscalYearEndDate
+        ORDER BY
+          DisclosedDate
+      ) AS Previous_EarningsPerShare,
+      LAG(CashFlowsFromOperatingActivities) OVER (
+        PARTITION BY
+          LocalCode,
+          CurrentFiscalYearEndDate
+        ORDER BY
+          DisclosedDate
+      ) AS Previous_CashFlowsFromOperatingActivities,
+      LAG(CashFlowsFromInvestingActivities) OVER (
+        PARTITION BY
+          LocalCode,
+          CurrentFiscalYearEndDate
+        ORDER BY
+          DisclosedDate
+      ) AS Previous_CashFlowsFromInvestingActivities
+    FROM
+      financials_filtered
+  ),
+  financials_single_q AS (
+    SELECT
+      *,
+      CASE
+        WHEN TypeOfCurrentPeriod = '1Q' THEN NetSales
+        ELSE NetSales - IFNULL(Previous_NetSales, 0)
+      END AS NetSales_singleQ,
+      CASE
+        WHEN TypeOfCurrentPeriod = '1Q' THEN OperatingProfit
+        ELSE OperatingProfit - IFNULL(Previous_OperatingProfit, 0)
+      END AS OperatingProfit_singleQ,
+      CASE
+        WHEN TypeOfCurrentPeriod = '1Q' THEN OrdinaryProfit
+        ELSE OrdinaryProfit - IFNULL(Previous_OrdinaryProfit, 0)
+      END AS OrdinaryProfit_singleQ,
+      CASE
+        WHEN TypeOfCurrentPeriod = '1Q' THEN Profit
+        ELSE Profit - IFNULL(Previous_Profit, 0)
+      END AS Profit_singleQ,
+      ROUND(
+        CASE
+          WHEN TypeOfCurrentPeriod = '1Q' THEN EarningsPerShare
+          ELSE EarningsPerShare - IFNULL(Previous_EarningsPerShare, 0)
+        END,
+        2
+      ) AS EarningsPerShare_singleQ -- 少数第2位で切り捨て
+    FROM
+      financials_with_lag
+  ),
+  financials_calculated AS (
+    SELECT
+      *,
+      ROUND(
+        SAFE_DIVIDE(OperatingProfit_singleQ, NetSales_singleQ) * 100,
+        2
+      ) AS OperatingProfitMargin_singleQ, -- 営業利益率
+      ROUND(
+        SAFE_DIVIDE(OrdinaryProfit_singleQ, NetSales_singleQ) * 100,
+        2
+      ) AS OrdinaryProfitMargin_singleQ, -- 経常利益率
+      ROUND(
+        SAFE_DIVIDE(Profit_singleQ, NetSales_singleQ) * 100,
+        2
+      ) AS NetProfitMargin_singleQ, -- 当期純利益率
+      ROUND(
+        SAFE_DIVIDE(
+          (
+            CashFlowsFromOperatingActivities - IFNULL(Previous_CashFlowsFromOperatingActivities, 0) + CashFlowsFromInvestingActivities - IFNULL(Previous_CashFlowsFromInvestingActivities, 0)
+          ),
+          NetSales_singleQ
+        ) * 100,
+        2
+      ) AS FCFMargin_singleQ, -- FCFマージン
+      ROUND(
+        SAFE_DIVIDE(
+          (
+            CashFlowsFromOperatingActivities - IFNULL(Previous_CashFlowsFromOperatingActivities, 0)
+          ),
+          NetSales_singleQ
+        ) * 100,
+        2
+      ) AS OperatingCFMargin_singleQ -- 営業CF比率
+    FROM
+      financials_single_q
+  ),
+  previous_fy_data AS (
+    SELECT
+      LocalCode,
+      CurrentFiscalYearEndDate,
+      MAX(DisclosedDate) AS MaxDisclosedDate,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock
+        END
+      ) AS Previous_NumberOfIssuedAndOutstandingShares,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN NetSales
+        END
+      ) AS Previous_NetSales,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN OperatingProfit
+        END
+      ) AS Previous_OperatingProfit,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN OrdinaryProfit
+        END
+      ) AS Previous_OrdinaryProfit,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN Profit
+        END
+      ) AS Previous_Profit,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN EarningsPerShare
+        END
+      ) AS Previous_EarningsPerShare,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN EquityToAssetRatio
+        END
+      ) AS Previous_EquityToAssetRatio,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN TotalAssets
+        END
+      ) AS Previous_TotalAssets,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN (
+            CashFlowsFromOperatingActivities + CashFlowsFromInvestingActivities
+          )
+        END
+      ) AS Previous_FCF,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN CashFlowsFromOperatingActivities
+        END
+      ) AS Previous_CashFlowsFromOperatingActivities,
+      MAX(
+        CASE
+          WHEN TypeOfCurrentPeriod = 'FY' THEN CashAndEquivalents
+        END
+      ) AS Previous_CashAndEquivalents
+    FROM
+      financials_filtered
+    GROUP BY
+      LocalCode,
+      CurrentFiscalYearEndDate
+  ),
+  stock_prices AS (
+    SELECT
+      sp.Code AS LocalCode,
+      fc.DisclosedDate AS FinancialDisclosedDate,
+      sp.Date AS StockDisclosedDate,
+      sp.Close AS StockPriceAtDisclosureDate,
+      ROW_NUMBER() OVER (
+        PARTITION BY
+          sp.Code,
+          fc.DisclosedDate
+        ORDER BY
+          sp.Date ASC
+      ) AS rn
+    FROM
+      `ynquant.jquants.daily_quotes` sp
+      JOIN financials_calculated fc ON sp.Code = fc.LocalCode
+    WHERE
+      DATE(sp.Date) > fc.DisclosedDate
+      AND sp.UpperLimit = '0' -- ストップ高以外
+      AND sp.LowerLimit = '0' -- ストップ安以外
+    QUALIFY
+      rn = 1
+  )
+SELECT
+  fc.LocalCode, -- 銘柄コード 
+  fc.DisclosedDate, -- 開示日
+  fc.TypeOfCurrentPeriod, -- 四半期
+  fc.NetSales AS NetSales_YTD, -- 通期積み上げの売上
+  fc.OperatingProfit AS OperatingProfit_YTD, -- 通期積み上げの営業利益
+  fc.OrdinaryProfit AS OrdinaryProfit_YTD, -- 通期積み上げの経常利益
+  fc.Profit AS Profit_YTD, -- 通期積み上げの純利益
+  fc.NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock, -- 期末発行済株式数（自己株式を含む）
+  fc.EarningsPerShare AS EarningsPerShare_YTD, -- 通期積み上げの1株当たり利益
+  fc.ForecastNetSales AS ForecastNetSales_YTD, -- 通期予想の売上
+  fc.ForecastOperatingProfit AS ForecastOperatingProfit_YTD, -- 通期予想の営業利益
+  fc.ForecastOrdinaryProfit AS ForecastOrdinaryProfit_YTD, -- 通期予想の経常利益
+  fc.ForecastProfit AS ForecastProfit_YTD, -- 通期予想の純利益
+  fc.ForecastEarningsPerShare AS ForecastEarningsPerShare_YTD, -- 通期予想の1株当たり利益
+  SAFE_DIVIDE(sp.StockPriceAtDisclosureDate, fc.ForecastEarningsPerShare) AS Forecast_PER_YTD, -- 通期予想のPER
+  SAFE_DIVIDE(fc.ForecastNetSales, sp.StockPriceAtDisclosureDate * fc.NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock) AS Forecast_PSR_YTD, -- 通期予想のPSR
+  fc.NextYearForecastNetSales AS NextYearForecastNetSales_YTD, -- 翌事業年度予想の売上
+  fc.NextYearForecastOperatingProfit AS NextYearForecastOperatingProfit_YTD, -- 翌事業年度予想の営業利益
+  fc.NextYearForecastOrdinaryProfit AS NextYearForecastOrdinaryProfit_YTD, -- 翌事業年度予想の経常利益
+  fc.NextYearForecastProfit AS NextYearForecastProfit_YTD, -- 翌事業年度予想の純利益
+  fc.NextYearForecastEarningsPerShare AS NextYearForecastEarningsPerShare_YTD, -- 翌事業年度予想の1株当たり利益
+  SAFE_DIVIDE(sp.StockPriceAtDisclosureDate, fc.NextYearForecastEarningsPerShare) AS NextYearForecast_PER_YTD, -- 翌事業年度予想のPER
+  SAFE_DIVIDE(fc.NextYearForecastNetSales, sp.StockPriceAtDisclosureDate * fc.NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock) AS NextYearForecast_PSR_YTD, -- 翌事業年度予想のPSR
+  fc.EquityToAssetRatio, -- 自己資本比率
+  fc.Equity AS Equity, -- 自己資本
+  fc.TotalAssets, -- 総資産
+  fc.CashFlowsFromOperatingActivities + fc.CashFlowsFromInvestingActivities AS CashFlowsFromOperatingAndInvestingActivities, -- 営業活動および投資活動によるキャッシュフロー
+  fc.CashFlowsFromOperatingActivities, -- 営業活動によるキャッシュフロー
+  fc.CashFlowsFromInvestingActivities, -- 投資活動によるキャッシュフロー
+  fc.CashAndEquivalents, -- 現金および現金同等物
+  SAFE_DIVIDE(fc.OperatingProfit, fc.NetSales) AS OperatingProfitMargin_YTD, -- 営業利益率
+  SAFE_DIVIDE(fc.OrdinaryProfit, fc.NetSales) AS OrdinaryProfitMargin_YTD, -- 経常利益率
+  SAFE_DIVIDE(fc.Profit, fc.NetSales) AS NetProfitMargin_YTD, -- 当期純利益率
+  SAFE_DIVIDE(fc.CashFlowsFromOperatingActivities + fc.CashFlowsFromInvestingActivities, fc.NetSales) AS FCFMargin_YTD, -- FCFマージン（FCF/売上高）
+  SAFE_DIVIDE(fc.CashFlowsFromOperatingActivities, fc.NetSales) AS OperatingCFMargin_YTD, -- 営業CF比率（営業CF/売上高）
+  SAFE_DIVIDE(fc.Profit, fc.Equity) AS ROE, -- 当期純利益/自己資本
+  SAFE_DIVIDE(fc.Profit, fc.TotalAssets) AS ROA, -- 当期純利益/総資産
+  SAFE_DIVIDE(fc.NetSales, fc.TotalAssets) AS TotalAssetTurnover, -- 売上高/総資産
+  SAFE_DIVIDE(sp.StockPriceAtDisclosureDate, fc.EarningsPerShare) AS PER, -- 株価/EPS
+  SAFE_DIVIDE(SAFE_DIVIDE(fc.Equity, fc.NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock), sp.StockPriceAtDisclosureDate) AS PBR, -- BPS/株価
+  SAFE_DIVIDE(fc.NetSales, sp.StockPriceAtDisclosureDate * fc.NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock) AS PSR, -- 売上高/時価総額
+  fc.NetSales_singleQ, -- 単Qの売上高
+  fc.OperatingProfit_singleQ, -- 単Qの営業利益
+  fc.OrdinaryProfit_singleQ, -- 単Qの経常利益
+  fc.Profit_singleQ, -- 単Qの純利益
+  fc.EarningsPerShare_singleQ, -- 単Qの1株当たり利益
+  fc.OperatingProfitMargin_singleQ, -- 単Qの営業利益率
+  fc.OrdinaryProfitMargin_singleQ, -- 単Qの経常利益率
+  fc.NetProfitMargin_singleQ, -- 単Qの当期純利益率
+  fc.FCFMargin_singleQ, -- 単Qの FCFマージン
+  fc.OperatingCFMargin_singleQ, -- 単Qの営業CF比率
+  SAFE_DIVIDE(fc.Profit_singleQ, (fc.Equity / 4)) AS ROE_singleQ, -- 当期純利益/自己資本（通期の総資産を割る4して近似）
+  SAFE_DIVIDE(fc.Profit_singleQ, (fc.TotalAssets / 4)) AS ROA_singleQ, -- 当期純利益/総資産（通期の総資産を割る4して近似）
+  SAFE_DIVIDE(fc.NetSales_singleQ, (fc.TotalAssets / 4)) AS TotalAssetTurnover_singleQ, -- 売上高/総資産（通期の総資産を割る4して近似）
+  SAFE_DIVIDE(SAFE_DIVIDE(sp.StockPriceAtDisclosureDate, 4), fc.EarningsPerShare_singleQ) AS PER_singleQ, -- 単QのPER
+  SAFE_DIVIDE(fc.NetSales_singleQ, SAFE_DIVIDE(sp.StockPriceAtDisclosureDate * fc.NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock, 4)) AS PSR_singleQ, -- 単QのPSR
+  LAG(fc.EquityToAssetRatio) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS Previous_EquityToAssetRatio, -- 前年同Qの自己資本比率
+  LAG(fc.EquityToAssetRatio * fc.TotalAssets) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS Previous_Equity, -- 前年同Qの自己資本
+  LAG(fc.TotalAssets) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS Previous_TotalAssets, -- 前年同Qの総資産
+  LAG(fc.NetSales_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_NetSales_singleQ, -- 前年同Qの売上高
+  LAG(fc.OperatingProfit_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_OperatingProfit_singleQ, -- 前年同Qの営業利益
+  LAG(fc.OrdinaryProfit_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_OrdinaryProfit_singleQ, -- 前年同Qの経常利益
+  LAG(fc.Profit_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_Profit_singleQ, -- 前年同Qの純利益
+  LAG(fc.EarningsPerShare_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_EarningsPerShare_singleQ, -- 前年同Qの1株当たり利益
+  LAG(fc.OperatingProfitMargin_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_OperatingProfitMargin_singleQ, -- 前年同Qの営業利益率
+  LAG(fc.OrdinaryProfitMargin_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_OrdinaryProfitMargin_singleQ, -- 前年同Qの経常利益率
+  LAG(fc.NetProfitMargin_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_NetProfitMargin_singleQ, -- 前年同Qの当期純利益率
+  LAG(fc.FCFMargin_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_FCFMargin_singleQ, -- 前年同QのFCFマージン
+  LAG(fc.OperatingCFMargin_singleQ) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_OperatingCFMargin_singleQ, -- 前年同Qの営業CF比率
+  LAG(SAFE_DIVIDE(fc.Profit_singleQ, (fc.Equity / 4))) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_ROE_singleQ, -- 前年同QのROE
+  LAG(SAFE_DIVIDE(fc.Profit_singleQ, (fc.TotalAssets / 4))) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_ROA_singleQ, -- 前年同QのROA
+  LAG(SAFE_DIVIDE(fc.NetSales_singleQ, (fc.TotalAssets / 4))) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_TotalAssetTurnover_singleQ, -- 前年同Qの総資産回転率
+  LAG(SAFE_DIVIDE(SAFE_DIVIDE(sp.StockPriceAtDisclosureDate, 4), fc.EarningsPerShare_singleQ)) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_PER_singleQ, -- 前年同QのPER
+  LAG(SAFE_DIVIDE(fc.NetSales_singleQ, SAFE_DIVIDE(sp.StockPriceAtDisclosureDate * fc.NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock, 4))) OVER (PARTITION BY fc.LocalCode, fc.TypeOfCurrentPeriod ORDER BY fc.DisclosedDate) AS Previous_PSR_singleQ, -- 前年同QのPSR
+  LAG(fc.EquityToAssetRatio) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_EquityToAssetRatio, -- 前Qの自己資本比率
+  LAG(fc.EquityToAssetRatio * fc.TotalAssets) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_Equity, -- 前Qの自己資本
+  LAG(fc.TotalAssets) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_TotalAssets, -- 前Qの総資産
+  LAG(fc.NetSales_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_NetSales_singleQ, -- 前Qの売上高
+  LAG(fc.OperatingProfit_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_OperatingProfit_singleQ, -- 前Qの営業利益
+  LAG(fc.OrdinaryProfit_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_OrdinaryProfit_singleQ, -- 前Qの経常利益
+  LAG(fc.Profit_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_Profit_singleQ, -- 前Qの純利益
+  LAG(fc.EarningsPerShare_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_EarningsPerShare_singleQ, -- 前Qの1株当たり利益
+  LAG(fc.OperatingProfitMargin_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_OperatingProfitMargin_singleQ, -- 前Qの営業利益率
+  LAG(fc.OrdinaryProfitMargin_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_OrdinaryProfitMargin_singleQ, -- 前Qの経常利益率
+  LAG(fc.NetProfitMargin_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_NetProfitMargin_singleQ, -- 前Qの当期純利益率
+  LAG(fc.FCFMargin_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_FCFMargin_singleQ, -- 前QのFCFマージン
+  LAG(fc.OperatingCFMargin_singleQ) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_OperatingCFMargin_singleQ, -- 前Qの営業CF比率
+  LAG(SAFE_DIVIDE(fc.Profit_singleQ, (fc.Equity / 4))) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_ROE_singleQ, -- 前QのROE
+  LAG(SAFE_DIVIDE(fc.Profit_singleQ, (fc.TotalAssets / 4))) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_ROA_singleQ, -- 前QのROA
+  LAG(SAFE_DIVIDE(fc.NetSales_singleQ, (fc.TotalAssets / 4))) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_TotalAssetTurnover_singleQ, -- 前Qの総資産回転率
+  LAG(SAFE_DIVIDE(SAFE_DIVIDE(sp.StockPriceAtDisclosureDate, 4), fc.EarningsPerShare_singleQ)) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_PER, -- 前QのPER
+  LAG(SAFE_DIVIDE(fc.NetSales_singleQ, SAFE_DIVIDE(sp.StockPriceAtDisclosureDate * fc.NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock, 4))) OVER (PARTITION BY fc.LocalCode ORDER BY fc.DisclosedDate) AS PreviousQuarter_PSR, -- 前QのPSR
+  pf.Previous_NumberOfIssuedAndOutstandingShares, -- 前年期末の発行済株式数（自己株式を含む）
+  pf.Previous_NetSales, -- 前年期末の売上高
+  pf.Previous_OperatingProfit, -- 前年期末の営業利益
+  pf.Previous_OrdinaryProfit, -- 前年期末の経常利益
+  pf.Previous_Profit, -- 前年期末の純利益
+  pf.Previous_EarningsPerShare, -- 前年期末の1株当たり利益
+  pf.Previous_EquityToAssetRatio, -- 前年期末の自己資本比率
+  pf.Previous_TotalAssets, -- 前年期末の総資産
+  pf.Previous_FCF AS Previous_CashFlowsFromOperatingAndInvestingActivities, -- 前年期末の営業活動および投資活動によるキャッシュフロー 
+  pf.Previous_CashFlowsFromOperatingActivities, -- 前年期末の営業活動によるキャッシュフロー
+  pf.Previous_CashAndEquivalents, -- 前年期末の現金および現金同等物
+  sp.StockPriceAtDisclosureDate, -- 開示日の直近時点での株価
+  fc.NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock * sp.StockPriceAtDisclosureDate AS MarketCapitalization -- 時価総額
+FROM
+  financials_calculated fc
+  LEFT JOIN previous_fy_data pf ON fc.LocalCode = pf.LocalCode
+  AND fc.CurrentFiscalYearEndDate = DATE_ADD(pf.CurrentFiscalYearEndDate, INTERVAL 1 YEAR)
+  LEFT JOIN stock_prices sp ON fc.LocalCode = sp.LocalCode
+  AND fc.DisclosedDate = sp.FinancialDisclosedDate
+ORDER BY
+  fc.LocalCode,
+  fc.DisclosedDate;

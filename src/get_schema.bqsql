@@ -1,0 +1,5 @@
+SELECT
+  table_name,
+  ddl
+FROM
+  `ynquant.jquants.INFORMATION_SCHEMA.TABLES`

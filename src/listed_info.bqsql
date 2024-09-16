@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS `ynquant.jquants.listed_info` (
+    info STRUCT<
+        Code STRING,
+        CompanyName STRING,
+        CompanyNameEnglish STRING,
+        Date STRING,
+        MarketCode STRING,
+        MarketCodeName STRING,
+        ScaleCategory STRING,
+        Sector17Code STRING,
+        Sector17CodeName STRING,
+        Sector33Code STRING,
+        Sector33CodeName STRING
+    >
+);
